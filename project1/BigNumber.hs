@@ -1,7 +1,5 @@
 type BigNumber = (Bool, [Int]) -- True -> positivo ; False -> negativo
 
---'0' = 48
-
 scanner :: String -> BigNumber
 scanner s   | head s == '-' = (False ,[fromEnum x - 48 | x <- reverse (tail s)])
             | otherwise = (True, [fromEnum x - 48 | x <- reverse s])
@@ -26,8 +24,6 @@ somaArray [] b c = b
 somaArray (x:xs) (y:ys) c   | x + y + c > 9 = mod (x + y + c) 10 : somaArray (if null xs then [0] else xs) (if null ys then [0] else ys) 1--números positivos
                             | otherwise = x + y + c: somaArray xs ys 0
 
---99 2 0 -> 9+2=11>9 -> 1 :
---[9] [0] 1 -> 0 : [0] [0] 1
 
 maiorOuIgualModulo :: BigNumber -> BigNumber -> Bool
 maiorOuIgualModulo (_,[]) (_,[]) = True
@@ -50,8 +46,7 @@ subArray a [] c = a
 subArray [] b c = b
 subArray (x:xs) (y:ys) c    | x < y + c = x + 10 - y - c : subArray (if null xs then [0] else xs) (if null ys then [0] else ys) 1
                             | otherwise = x - y - c: subArray xs ys 0
---[0,0,1] [2] 0 -> 8 : [0,1] [0] 1 
---[0,1] [0] 1 -> 9 : [1] [0] 1
+
 
 limpaZeros :: [Int] -> [Int]
 limpaZeros l = reverse (until (\x -> (x == [0]) || (head x /= 0)) tail (reverse l))
@@ -69,7 +64,14 @@ mulBNCarry [] b c = []
 mulBNCarry (x:xs) (y:ys) c  | x * y + c > 9 = mod (x * y + c) 10 : mulBNCarry (if null xs then [0] else head xs : tail xs) [y] (div (x*y+c) 10)
                             | otherwise = x * y + c : mulBNCarry xs [y] 0
 
-divBN :: BigNumber -> BigNumber -> (BigNumber,BigNumber)
-divBN a b = last (until (\[(w,x),(y,z)] -> not (fst (subBN z x))) (\[(w,x),(y,z)] -> [(w,x),(somaBN y (True,[1]), subBN z x)]) [(a,b),((True,[0]),a)])
 
+divBN :: BigNumber -> BigNumber -> (BigNumber,BigNumber)
+divBN a b   | not (maiorOuIgualModulo a b) = ((True, [0]), a)
+            | otherwise = last (until (\[(w,x),(y,z)] -> not (fst (subBN z x))) (\[(w,x),(y,z)] -> [(w,x),(somaBN y (True,[1]), subBN z x)]) [(a,b),((True,[0]),a)])
+
+
+safeDivBN :: BigNumber -> BigNumber -> Maybe (BigNumber,BigNumber)
+safeDivBN a b   | limpaZeros (snd b) == [0] = Nothing 
+                | not (maiorOuIgualModulo a b) = Just ((True, [0]), a)
+                | otherwise = Just (last (until (\[(w,x),(y,z)] -> not (fst (subBN z x))) (\[(w,x),(y,z)] -> [(w,x),(somaBN y (True,[1]), subBN z x)]) [(a,b),((True,[0]),a)]))
 
