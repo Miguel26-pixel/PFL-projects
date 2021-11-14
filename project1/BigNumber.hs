@@ -1,3 +1,5 @@
+module BigNumber where
+
 type BigNumber = (Bool, [Int]) -- True -> positivo ; False -> negativo
 
 scanner :: String -> BigNumber
@@ -12,8 +14,8 @@ output a    | fst a = [toEnum (x + 48)::Char | x <- reverse (snd a)]
 
 somaBN :: BigNumber -> BigNumber -> BigNumber
 somaBN a b  | fst a && fst b = (True, somaArray (snd a) (snd b) 0)
-            | fst a && not (fst b) = subBN a b
-            | not (fst a) && fst b = subBN a b
+            | fst a && not (fst b) = subBN a (True, snd b)
+            | not (fst a) && fst b = subBN b (True, snd a)
             | otherwise = (False, somaArray (snd a) (snd b) 0)
 
 
@@ -75,3 +77,9 @@ safeDivBN a b   | limpaZeros (snd b) == [0] = Nothing
                 | not (maiorOuIgualModulo a b) = Just ((True, [0]), a)
                 | otherwise = Just (last (until (\[(w,x),(y,z)] -> not (fst (subBN z x))) (\[(w,x),(y,z)] -> [(w,x),(somaBN y (True,[1]), subBN z x)]) [(a,b),((True,[0]),a)]))
 
+
+getLista :: BigNumber -> [BigNumber]
+getLista a = until (\x -> last x == a) (\x -> x ++ [somaBN (last x) (True,[1])]) [(True,[0])]
+
+getIndex :: [BigNumber] -> BigNumber -> BigNumber
+getIndex a b = head (fst (until (\(x, y) -> y == (True, [0])) (\(x, y) ->  (tail x, subBN y (True, [1]))) (a,b)))
