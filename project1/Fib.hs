@@ -13,6 +13,12 @@ fibLista a = lista !! fromIntegral a where lista = [fibRec x | x <- [0..a]]
 fibListaInfinita :: Integral a => a -> a
 fibListaInfinita a = lista !! fromIntegral a where lista = [0,1] ++ zipWith (+) lista (tail lista)
 
+fibListaInfinitaINT :: Int -> Int --max : 94
+fibListaInfinitaINT a = lista !! fromIntegral a where lista = [0,1] ++ zipWith (+) lista (tail lista)
+
+fibListaInfinitaINTEGER :: Integer -> Integer --max : 94
+fibListaInfinitaINTEGER a = lista !! fromIntegral a where lista = [0,1] ++ zipWith (+) lista (tail lista)
+
 
 fibRecBN :: BigNumber -> BigNumber 
 fibRecBN a  | limpaZeros (snd a) == [0] = (True, [0])
