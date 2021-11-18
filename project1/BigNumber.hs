@@ -1,4 +1,16 @@
-module BigNumber where
+module BigNumber(
+    BigNumber,
+    scanner,
+    output,
+    somaBN,
+    subBN,
+    mulBN,
+    divBN,
+    safeDivBN,
+    getIndex,
+    lengthBN,
+    limpaZeros
+) where
 
 type BigNumber = (Bool, [Int]) -- True -> positivo ; False -> negativo
 
@@ -83,3 +95,6 @@ getLista a = until (\x -> last x == a) (\x -> x ++ [somaBN (last x) (True,[1])])
 
 getIndex :: [BigNumber] -> BigNumber -> BigNumber
 getIndex a b = head (fst (until (\(x, y) -> y == (True, [0])) (\(x, y) ->  (tail x, subBN y (True, [1]))) (a,b)))
+
+lengthBN :: [BigNumber] -> BigNumber
+lengthBN = foldr (\_ x -> somaBN x (True, [1])) (True, [0])
