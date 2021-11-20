@@ -1,5 +1,93 @@
 # PFL - Trabalho Prático 1
 
+## Descrição de vários casos de teste para todas as funções
+
+### fibRec
+
+### fibLista
+
+### fibListaInfinita
+
+### fibRecBN
+
+### fibListaBN
+
+### fibListaInfinitaBN
+
+### scanner
+
+### output
+
+### somaBN
+
+### subBN
+
+### mulBN
+
+### divBN
+
+### safeDivBN
+
+## Explicação sucinta do funcionamento de cada função (exceto as do exercicio 2)
+
+### fibRec
+
+### fibLista
+
+### fibListaInfinita
+
+### fibRecBN
+
+### fibListaBN
+
+### fibListaInfinitaBN
+
+### somaArray
+
+### maiorOuIgualModulo
+
+### subArray
+
+### limpaZeros
+
+### mulBNCarry
+
+### getLista
+
+### getIndex
+
+### lengthBN
+
+## Estratégias utilizadas na implementação das funções da alínea 2
+
+### scanner
+
+Verificar se string começa com '-' para obter o sinal do número e depois passar cada caracter correspondente a um número para Int através dos códigos ASCII
+
+### output
+
+Caso for falso começar com o caracter '-' que representa o sinal do número e depois passar cada digito do array para o caracter correspondente através dos códigos ASCII
+
+### somaBN
+
+O algoritmo feito começava por ver os sinais pois caso apenas um dos números fosse negativo (equivalente a uma subtração) então chamava o método subBN, e após essa verificação foi implementado o algoritmo básico da soma que percorre os algoritmos correspondentes e faz a sua adição
+
+### subBN
+
+O algoritmo feito começava por ver os sinais pois caso apenas um dos números fosse negativo (equivalente a uma adição) então chamava o método somaBN, e após essa verificação foi implementado o algoritmo básico da subtração que percorre os algoritmos correspondentes e faz as operações necessárias
+
+### mulBN
+
+O algoritmo desenvolvido para a múltiplicação começava por obter o sinal do valor que irá ser obtido no fim e depois foi implementado o algoritmo básico da multiplicação que faz as operações necessárias
+
+### divBN
+
+O algoritmo desenvolvido para a divisão adiciona 1 ao quociente até que a subtração do acumulador com o divisor seja menor que zero e após isso é calculado o resto utilizando a função mod
+
+### safeDivBN
+
+Foi utilizado o mesmo algoritmo do que a divBN mas este verificava se o divisor era zero, para o qual é impossivel fazer a divisão e por isso retornava Nothing, caso contrário retorna o valor da divisão
+
 ## Resposta ao exercício 4
 
 Comparando os diferentes tipos, (Int -> Int), (Integer -> Integer) e (BigNumber -> BigNumber) observamos que o tipo (Int -> Int) está limitado entre os limites [minBound :: Int, maxBound :: Int] = [-9223372036854775808, 9223372036854775807] e que os tipos (Integer -> Integer) e (BigNumber -> BigNumber) apenas está limitado ao tamanho da memória da máquina.
