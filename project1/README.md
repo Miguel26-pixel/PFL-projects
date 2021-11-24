@@ -4,59 +4,100 @@
 
 ### fibRec
 
+
 ### fibLista
+
 
 ### fibListaInfinita
 
+
 ### fibRecBN
+
 
 ### fibListaBN
 
+
 ### fibListaInfinitaBN
+
 
 ### scanner
 
+
 ### output
+
 
 ### somaBN
 
+
 ### subBN
+
 
 ### mulBN
 
+
 ### divBN
 
+
 ### safeDivBN
+
 
 ## Explicação sucinta do funcionamento de cada função (exceto as do exercicio 2)
 
 ### fibRec
 
+calcula o resultado da operação Fibonnacci para o valor dado com argumento
+
 ### fibLista
+
+calcula o resultado da operação Fibonnacci para o valor dado com argumento, através da utilização de uma lista finita de valores de Fibonnacci
 
 ### fibListaInfinita
 
+calcula o resultado da operação Fibonnacci para o valor dado com argumento, através da utilização de uma lista infinita de valores de Fibonnacci
+
 ### fibRecBN
+
+calcula o resultado da operação Fibonnacci para o valor dado com argumento do tipo BigNumber
 
 ### fibListaBN
 
+calcula o resultado da operação Fibonnacci para o valor dado com argumento do tipo BigNumber, através da utilização de uma lista finita de valores de Fibonnacci do tipo BigNUmber
+
 ### fibListaInfinitaBN
+
+calcula o resultado da operação Fibonnacci para o valor dado com argumento do tipo BigNumber, através da utilização de uma lista infinita de valores de Fibonnacci do tipo BigNumber
 
 ### somaArray
 
+calcula a soma entre valores de duas listas positivos
+
 ### maiorOuIgualModulo
+
+dados dois valores do tipo BigNumber, verifica se o primeiro é maior ou igual (em módulo) em relação ao segundo
 
 ### subArray
 
+calcula a subtração entre valores de duas listas positivos
+
 ### limpaZeros
+
+Remove os zeros há direita do array que são desnecessários para a representação do número
 
 ### mulBNCarry
 
+Função auxiliar para fazer a múltiplicação de dois arrays de digitos, independentemente do sinal
+
 ### getLista
+
+Função que retorna uma lista de BigNumbers que representam os números de 0 até ao BigNumber passado como argumento
 
 ### getIndex
 
+Função que retorna um BigNumber de uma lista de BigNumbers que está num certo índice do array
+
 ### lengthBN
+
+Função que retorna um BigNumber que representa o tamanho de uma lista de uma lista de BigNumbers
 
 ## Estratégias utilizadas na implementação das funções da alínea 2
 
