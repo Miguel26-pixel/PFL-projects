@@ -2,7 +2,7 @@
 
 ## Descrição de vários casos de teste para todas as funções
 
-Em cada ficheiro são apresentadas funções relativas aos testes das funções do próprio projeto.
+Em cada ficheiro, Fib.hs e BigNumber.hs, são apresentadas funções de teste que retornam um valor Boleano, True no caso de passar e False se algum dos testes falhou
 
 ## Explicação sucinta do funcionamento de cada função (exceto as do exercicio 2)
 
@@ -110,4 +110,3 @@ Neste tipo o cálculo do enésimo número de Fibonacci está limitado até ao in
 Comparando estes dois tipos, observamos alguma diferença de tempos até calcular o valor para valores muito grandes, sendo que o cálculo com BigNumbers demora sempre mais do que com Integers, devido a alguma falta de eficiencia das funções que implementam as operações com os BigNumbers. Comparando os tempos:  
  -> execução de fibListaInfinitaINTEGER 10000 é **instantâneo**  
  -> execução de fibListaInfinitaBN (scanner "10000")  demora cerca de **11 segundos**  
-

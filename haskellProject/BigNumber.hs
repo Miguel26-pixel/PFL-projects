@@ -183,7 +183,8 @@ lengthBN :: [BigNumber] -> BigNumber
 lengthBN = foldr (\_ x -> somaBN x (True, [1])) (True, [0]) --1)
 
 {-
-Funções para teste.
+Funções para teste. Foram criadas 2 listas com BigNumbers que representa o primeiro e o segundo operador e para cada operação foi criado um array com o resultado da operação entre os 2 BigNumbers no mesmo índice na lista.
+Por fim foi comparado a lista com os resultados feitos manualmente com o resultado usando as funções definidas para os BigNumbers
 -}
 fibDataBN :: [BigNumber ]
 fibDataBN = [(True,[0]),(True,[1]),(True,[2]),(True,[3]),(True,[4]),(True,[5]),(True,[6]),(True,[7]),(True,[8]),(True,[9]),(True,[0,1])]
