@@ -2,44 +2,7 @@
 
 ## Descrição de vários casos de teste para todas as funções
 
-### fibRec
-
-
-### fibLista
-
-
-### fibListaInfinita
-
-
-### fibRecBN
-
-
-### fibListaBN
-
-
-### fibListaInfinitaBN
-
-
-### scanner
-
-
-### output
-
-
-### somaBN
-
-
-### subBN
-
-
-### mulBN
-
-
-### divBN
-
-
-### safeDivBN
-
+Em cada ficheiro são apresentadas funções relativas aos testes das funções do próprio projeto.
 
 ## Explicação sucinta do funcionamento de cada função (exceto as do exercicio 2)
 
