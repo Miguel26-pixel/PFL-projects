@@ -12,7 +12,8 @@ fibRec a | a == 0 = 0
 calcula o enésimo número de Fibonacci utilizando programação dinamica. Tem como argumento um valor do tipo Integral
 -}
 fibLista :: Integral a => a -> a
-fibLista a = lista !! fromIntegral a where lista = until (\l -> length l - 1 == fromIntegral a) (\l -> l ++ [last l + l !! (length l - 2)]) [0,1]
+fibLista a  | a == 0 = 0
+            | otherwise = lista !! fromIntegral a where lista = until (\l -> length l - 1 == fromIntegral a) (\l -> l ++ [last l + l !! (length l - 2)]) [0,1]
 
 {-
 calcula o enésimo número de Fibonacci utilizando uma lista infinita. Tem como argumento um valor do tipo Integral
@@ -46,10 +47,41 @@ fibRecBN a  | limpaZeros (snd a) == [0] = (True, [0])
 calcula o enésimo número de Fibonacci utilizando programação dinamica. Tem como argumento um valor do tipo BigNummber e retorna um valor do mesmo tipo
 -}
 fibListaBN :: BigNumber -> BigNumber
-fibListaBN a = getIndex lista a where lista = until (\l -> subBN (lengthBN l) (True, [1]) == a) (\l -> l ++ [somaBN (last l)  (l !! (length l - 2))]) [(True, [0]),(True, [1])]
+fibListaBN a    | a == scanner "0" = a
+                | otherwise = getIndex lista a where lista = until (\l -> subBN (lengthBN l) (True, [1]) == a) (\l -> l ++ [somaBN (last l)  (l !! (length l - 2))]) [(True, [0]),(True, [1])]
 
 {-
 calcula o enésimo número de Fibonacci utilizando uma lista infinita. Tem como argumento um valor do tipo BigNummber e retorna um valor do mesmo tipo
 -}
 fibListaInfinitaBN :: BigNumber -> BigNumber
 fibListaInfinitaBN = getIndex lista where lista = [(True, [0]),(True, [1])] ++ zipWith somaBN lista (tail lista)
+
+
+
+{-
+Funções para teste. Calculam os 10 primeiros valores e o resultado é comparado com valores de uma lista fixa e préviamente feita. Caso algum valor falhe retorna falso.
+Sendo as funções recursivas basta apenas testar para os 10 primeiros valores, pois para valores maiores a forma de cálculo será sempre igual
+-}
+fibData :: [Int]
+fibData = [0,1,1,2,3,5,8,13,21,34,55]
+
+fibDataBN :: [BigNumber ]
+fibDataBN = [(True,[0]),(True,[1]),(True,[1]),(True,[2]),(True,[3]),(True,[5]),(True,[8]),(True,[3,1]),(True,[1,2]),(True,[4,3]),(True,[5,5])]
+
+testeFib :: Bool
+testeFib = [fibRec x | x <- [0..10]] == fibData
+
+testeFibBN :: Bool
+testeFibBN = [fibRecBN x | x <- getLista (scanner "10")] == fibDataBN
+
+testeFibLista :: Bool
+testeFibLista = [fibLista x | x <- [0..10]] == fibData
+
+testeFibListaBN :: Bool
+testeFibListaBN = [fibListaBN x | x <- getLista (scanner "10")] == fibDataBN
+
+testeFibListaInfinita :: Bool
+testeFibListaInfinita = [fibListaInfinita x | x <- [0..10]] == fibData
+
+testeFibListaInfinitaBN :: Bool
+testeFibListaInfinitaBN = [fibListaInfinitaBN x | x <- getLista (scanner "10")] == fibDataBN

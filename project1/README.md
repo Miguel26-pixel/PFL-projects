@@ -8,39 +8,39 @@ Em cada ficheiro são apresentadas funções relativas aos testes das funções 
 
 ### fibRec
 
-calcula o resultado da operação Fibonnacci para o valor dado com argumento
+Calcula o resultado da operação Fibonnacci para o valor dado com argumento
 
 ### fibLista
 
-calcula o resultado da operação Fibonnacci para o valor dado com argumento, através da utilização de uma lista finita de valores de Fibonnacci
+Calcula o resultado da operação Fibonnacci para o valor dado com argumento, através da utilização de uma lista finita de valores de Fibonnacci
 
 ### fibListaInfinita
 
-calcula o resultado da operação Fibonnacci para o valor dado com argumento, através da utilização de uma lista infinita de valores de Fibonnacci
+Calcula o resultado da operação Fibonnacci para o valor dado com argumento, através da utilização de uma lista infinita de valores de Fibonnacci
 
 ### fibRecBN
 
-calcula o resultado da operação Fibonnacci para o valor dado com argumento do tipo BigNumber
+Calcula o resultado da operação Fibonnacci para o valor dado com argumento do tipo BigNumber
 
 ### fibListaBN
 
-calcula o resultado da operação Fibonnacci para o valor dado com argumento do tipo BigNumber, através da utilização de uma lista finita de valores de Fibonnacci do tipo BigNUmber
+Calcula o resultado da operação Fibonnacci para o valor dado com argumento do tipo BigNumber, através da utilização de uma lista finita de valores de Fibonnacci do tipo BigNUmber
 
 ### fibListaInfinitaBN
 
-calcula o resultado da operação Fibonnacci para o valor dado com argumento do tipo BigNumber, através da utilização de uma lista infinita de valores de Fibonnacci do tipo BigNumber
+Calcula o resultado da operação Fibonnacci para o valor dado com argumento do tipo BigNumber, através da utilização de uma lista infinita de valores de Fibonnacci do tipo BigNumber
 
 ### somaArray
 
-calcula a soma entre valores de duas listas positivos
+Calcula a soma entre valores de duas listas positivos
 
 ### maiorOuIgualModulo
 
-dados dois valores do tipo BigNumber, verifica se o primeiro é maior ou igual (em módulo) em relação ao segundo
+Dados dois valores do tipo BigNumber, verifica se o primeiro é maior ou igual (em módulo) em relação ao segundo
 
 ### subArray
 
-calcula a subtração entre valores de duas listas positivos
+Calcula a subtração entre valores de duas listas positivos
 
 ### limpaZeros
 
@@ -110,6 +110,4 @@ Neste tipo o cálculo do enésimo número de Fibonacci está limitado até ao in
 Comparando estes dois tipos, observamos alguma diferença de tempos até calcular o valor para valores muito grandes, sendo que o cálculo com BigNumbers demora sempre mais do que com Integers, devido a alguma falta de eficiencia das funções que implementam as operações com os BigNumbers. Comparando os tempos:  
  -> execução de fibListaInfinitaINTEGER 10000 é **instantâneo**  
  -> execução de fibListaInfinitaBN (scanner "10000")  demora cerca de **11 segundos**  
-
-
 
