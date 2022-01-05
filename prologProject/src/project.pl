@@ -8,22 +8,29 @@ initial_state(B) :- B = [   [2,0,2,1,0,2],
                             [0,1,0,2,2,0],
                             [1,1,0,0,0,0]   ].
 
-play :- playPvP(Board,1,[p1,p2]).
+play :- initial_state(Board),
+        playPvP(Board,1).
 
-playPvP(Board,Turn,Players) :-  /*getNames(P1,P2),*/
-                                initial_state(Board),
-                                display_game(Board,Turn,Players),
+playPvP(Board,Turn) :-  get_names(P1,P2),
+                        playPvP(Board,Turn,[P1,P2]).
+
+playPvP(Board,Turn,Players) :-  display_game(Board,Turn,Players),
                                 valid_moves(Board,Turn,Moves),
-                                display_game(Moves,Turn,Players).
+                                game_over(Moves,Turn,Winner),
+                                (Winner =\= 0 -> 
+                                    quit_game(Winner,Players)
+                                ;   
+                                    get_valid_move(Moves,Row,Col),
+                                    move(Board,Turn,Row,Col,Res),
+                                    get_new_turn(Turn,New),
+                                    playPvP(Res,New,Players)
+                                ).
 
-move(Board,Turn,Move,ResultBoard) :- !.
+move(Board,Turn,Row,Col,ResultBoard) :- move_row(Board,Turn,Row,Col,[],ResultBoard).
 
-game_over(Board,Turn,Result) :- !.
+game_over([],Turn,Winner) :- get_new_turn(Turn,Winner).
 
-choose_move(Board,Turn,Level,Move) :- !.
+game_over([Row | T],Turn,Winner) :- game_over_row(Row,Res),
+                                    (Res =:= 0 -> Winner is 0 ; game_over(T,Turn,Winner)).
 
-test :- testMoves(Board,1).
-
-testMoves(Board,Turn) :-    initial_state(Board),
-                            valid_moves(Board,Turn,Moves),
-                            display_game(Moves, Turn, [p1,p2]).
+choose_move(Board,Turn,Level,Move).
