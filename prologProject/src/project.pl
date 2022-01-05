@@ -25,7 +25,7 @@ test :- testMoves(Board,1).
 testMoves(Board,Turn) :-    initial_state(Board),
                             /*valid_moves(Board,Turn,Moves),
                             display_game(Moves, Turn, [p1,p2]).*/
-                            getNumFriends(Board,2,3,1,Result), write(Result).
+                            getNumEnemies(Board,3,3,1,Result), write(Result).
 
 
 
