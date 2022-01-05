@@ -1,7 +1,7 @@
-getNumFriends(Board,RN,CN,Turn,Friends) :-  getFriendUP(Board,RN,CN,Turn,UP), write(UP),
-                                            getFriendDOWN(Board,RN,CN,Turn,DOWN), write(DOWN),
-                                            getFriendLEFT(Board,RN,CN,Turn,LEFT), write(LEFT),
-                                            getFriendRIGHT(Board,RN,CN,Turn,RIGHT), write(RIGHT),
+getNumFriends(Board,RN,CN,Turn,Friends) :-  getFriendUP(Board,RN,CN,Turn,UP),
+                                            getFriendDOWN(Board,RN,CN,Turn,DOWN),
+                                            getFriendLEFT(Board,RN,CN,Turn,LEFT),
+                                            getFriendRIGHT(Board,RN,CN,Turn,RIGHT),
                                             Friends is UP + DOWN + LEFT + RIGHT.
 
 getFriendUP(Board,RN,CN,Turn,Result) :- (RN > 0 -> Row is RN - 1, getValue(Board,Row,CN,ResUP),
@@ -24,10 +24,10 @@ getFriendRIGHT(Board,RN,CN,Turn,Result) :- (CN < 5 -> Col is CN + 1, getValue(Bo
                                         ; Result is 0
                                         ).
 
-getNumEnemies(Board,RN,CN,Turn,Enemies) :-  getEnemiesUP(Board,RN,CN,Turn,UP), write(UP),
-                                            getEnemiesDOWN(Board,RN,CN,Turn,DOWN), write(DOWN),
-                                            getEnemiesLEFT(Board,RN,CN,Turn,LEFT), write(LEFT),
-                                            getEnemiesRIGHT(Board,RN,CN,Turn,RIGHT), write(RIGHT),
+getNumEnemies(Board,RN,CN,Turn,Enemies) :-  getEnemiesUP(Board,RN,CN,Turn,UP),
+                                            getEnemiesDOWN(Board,RN,CN,Turn,DOWN),
+                                            getEnemiesLEFT(Board,RN,CN,Turn,LEFT),
+                                            getEnemiesRIGHT(Board,RN,CN,Turn,RIGHT),
                                             Enemies is UP + DOWN + LEFT + RIGHT.
 
 getEnemiesUP(Board,RN,CN,Turn,Result) :- (RN > 0 -> Row is RN - 1, getValue(Board,Row,CN,ResUP),

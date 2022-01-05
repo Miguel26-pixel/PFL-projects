@@ -8,7 +8,7 @@ letters(6,'G').
 letters(7,'H').
 letters(8,'I').
 
-display_game(Board, Turn, Players) :-  write('33[2J'),nl,nl,
+display_game(Board, Turn, Players) :-  nl,nl,
                                 write('\t'),
                                 print_string("PATHWAY"),
                                 nl,nl,
