@@ -25,7 +25,8 @@ playPvP(Board,Turn,Players) :-  display_game(Board,Turn,Players),
                                 valid_moves(Board,Turn,Moves),
                                 game_over(Moves,Turn,Winner),
                                 (Winner =\= 0 -> 
-                                    quit_game(Winner,Players)
+                                    quit_game(Winner,Players),
+                                    play
                                 ;   
                                     get_valid_move(Moves,Row,Col),
                                     move(Board,Turn,Row,Col,Res),
