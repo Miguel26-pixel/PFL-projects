@@ -23,6 +23,7 @@ playPvP(Board,Turn) :-  get_names(P1,P2),
 
 playPvP(Board,Turn,Players) :-  display_game(Board,Turn,Players),
                                 valid_moves(Board,Turn,Moves),
+                                display_game(Moves,Turn,Players),
                                 game_over(Moves,Turn,Winner),
                                 (Winner =\= 0 -> 
                                     quit_game(Winner,Players),
@@ -43,6 +44,10 @@ move(Board,Turn,Row,Col,ResultBoard) :- move_row(Board,Turn,Row,Col,[],ResultBoa
 game_over([],Turn,Winner) :- get_new_turn(Turn,Winner).
 
 game_over([Row | T],Turn,Winner) :- game_over_row(Row,Res),
-                                    (Res =:= 0 -> Winner is 0 ; game_over(T,Turn,Winner)).
+                                    (Res =:= 0 -> 
+                                        Winner is 0 
+                                    ; 
+                                        game_over(T,Turn,Winner)
+                                    ).
 
 choose_move(Board,Turn,Level,Move).
