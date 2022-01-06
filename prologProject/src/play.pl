@@ -1,5 +1,5 @@
 :- include('game.pl').
-:- include('view.pl').
+:- include('menu.pl').
 
 initial_state(B) :- B = [   [2,0,2,1,0,2],
                             [2,0,0,1,1,1],
@@ -8,8 +8,15 @@ initial_state(B) :- B = [   [2,0,2,1,0,2],
                             [0,1,0,2,2,0],
                             [1,1,0,0,0,0]   ].
 
-play :- initial_state(Board),
-        playPvP(Board,1).
+play :- menu(Option),
+        play(Option). 
+
+play(1) :- playPvP.
+play(2) :- playPvC.
+play(3) :- playCvP.
+    
+playPvP :-  initial_state(Board),
+            playPvP(Board,1).
 
 playPvP(Board,Turn) :-  get_names(P1,P2),
                         playPvP(Board,Turn,[P1,P2]).
@@ -25,6 +32,10 @@ playPvP(Board,Turn,Players) :-  display_game(Board,Turn,Players),
                                     get_new_turn(Turn,New),
                                     playPvP(Res,New,Players)
                                 ).
+
+playPvC :- play.
+
+playCvP :- play.
 
 move(Board,Turn,Row,Col,ResultBoard) :- move_row(Board,Turn,Row,Col,[],ResultBoard).
 
