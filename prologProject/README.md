@@ -24,3 +24,24 @@ Sendo que:
  - **CONEXÂO INIMIGA** é uma adjacência entre dois quadrados com peças de cor diferentes
 
  Jogo Oficial: [PATHWAY](http://www.marksteeregames.com/Pathway_rules.pdf)
+
+
+## Lógica do jogo
+
+### Representação interna do estado do jogo
+
+### Visualização do estado de jogo
+
+### Execução de Jogadas
+
+### Final do Jogo
+
+### Lista de Jogadas Válidas
+
+### Jogada do Computador
+
+## Conclusões
+
+## Bibliografia
+- Slides e Apontamentos das aulas teóricas de PFL
+- [Documentação SICStus](https://sicstus.sics.se/documentation.html)
