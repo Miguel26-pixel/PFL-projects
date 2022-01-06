@@ -23,7 +23,6 @@ playPvP(Board,Turn) :-  get_names(P1,P2),
 
 playPvP(Board,Turn,Players) :-  display_game(Board,Turn,Players),
                                 valid_moves(Board,Turn,Moves),
-                                display_game(Moves,Turn,Players),
                                 game_over(Moves,Turn,Winner),
                                 (Winner =\= 0 -> 
                                     quit_game(Winner,Players),
