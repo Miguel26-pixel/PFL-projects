@@ -3,6 +3,7 @@
 option('1',1).
 option('2',2).
 option('3',3).
+option('4',4).
 option(_,-1).
 
 menu(Option) :- display_menu,

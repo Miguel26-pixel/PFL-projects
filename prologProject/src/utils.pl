@@ -20,3 +20,5 @@ getV(0,[X|T],X).
 getV(N,[H|T],X) :-  N > 0,
                     N1 is N - 1,
                     getV(N1,T,X).
+
+wait_for_input :- get_code(X), skip_line.

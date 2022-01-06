@@ -14,6 +14,7 @@ play :- menu(Option),
 play(1) :- playPvP.
 play(2) :- playPvC.
 play(3) :- playCvP.
+play(4) :- !.
     
 playPvP :-  initial_state(Board),
             playPvP(Board,1).
@@ -26,6 +27,7 @@ playPvP(Board,Turn,Players) :-  display_game(Board,Turn,Players),
                                 game_over(Moves,Turn,Winner),
                                 (Winner =\= 0 -> 
                                     quit_game(Winner,Players),
+                                    wait_for_input,
                                     play
                                 ;   
                                     get_valid_move(Moves,Row,Col),
