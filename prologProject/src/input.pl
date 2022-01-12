@@ -1,5 +1,3 @@
-:- include('utils.pl').
-
 row('A',0).
 row('B',1).
 row('C',2).
@@ -27,3 +25,19 @@ get_row(RN) :- write('ERROR: Invalid Input'),nl,get_row(RN).
 
 get_col(CN) :- write('Column: '), read_number(Col), col(Col,CN), CN =\= -1.
 get_col(CN) :- write('ERROR: Invalid Input'), nl, get_col(CN).
+
+read_string(X) :- read_string(X,[]).
+read_string(X,X) :- peek_code(10),!,skip_line.
+read_string(X,Acc) :-   get_code(Char),
+                        append(Acc,[Char],Next),
+                        read_string(X,Next).
+
+read_number(X) :-   read_number(X,0).
+read_number(X,X) :- peek_code(10), !, skip_line.
+read_number(X,Acc) :-   get_code(Char),
+                        char_code('0',Zero),
+                        N is Char - Zero,
+                        Next is Acc * 10 + N,
+                        read_number(X,Next).
+
+wait_for_input :- skip_line.

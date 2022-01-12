@@ -1,5 +1,6 @@
 :- include('game.pl').
 :- include('menu.pl').
+:- include('view.pl').
 
 initial_state(B) :- B = [   [2,0,2,1,0,2],
                             [2,0,0,1,1,1],
@@ -10,6 +11,9 @@ initial_state(B) :- B = [   [2,0,2,1,0,2],
 
 play :- menu(Option),
         play(Option). 
+
+menu(Option) :- display_menu,
+                get_option(Option).
 
 play(1) :- playPvP.
 play(2) :- playPvC.
@@ -51,4 +55,4 @@ game_over([Row | T],Turn,Winner) :- game_over_row(Row,Res),
                                         game_over(T,Turn,Winner)
                                     ).
 
-choose_move(Board,Turn,Level,Move).
+%choose_move(Board,Turn,Level,Move).

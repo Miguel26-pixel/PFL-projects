@@ -1,4 +1,3 @@
-:- include('view.pl').
 :- include('adjacencies.pl').
 :- include('input.pl').
 
@@ -14,14 +13,13 @@ valid_moves(Board,[R | T],RN,Turn,Acc,Moves) :- valid_moves_row(Board,R,RN,0,Tur
                                                 valid_moves(Board,T,NewRow,Turn,New,Moves).
 
 valid_moves_row(_,[],_,_,_,Row,Row).
-valid_moves_row(Board,[H | T],RN,CN,Turn,Acc,Row) :-    valid_move(Board,RN,CN,Turn,Result),
+valid_moves_row(Board,[V | T],RN,CN,Turn,Acc,Row) :-    valid_move(Board,V,RN,CN,Turn,Result),
                                                         append(Acc,[Result],New),
                                                         NewCol is CN+1,
                                                         valid_moves_row(Board,T,RN,NewCol,Turn,New,Row).
 
-valid_move(Board,RN,CN,Turn,Result) :-  getNumFriends(Board,RN,CN,Turn,Friends),
+valid_move(Board,Value,RN,CN,Turn,Result) :-  getNumFriends(Board,RN,CN,Turn,Friends),
                                         getNumEnemies(Board,RN,CN,Turn,Enemies),
-                                        getValue(Board,RN,CN,Value),
                                         validate_check(Friends,Enemies,Value,Result).
 
 validate_check(Friends,Enemies,Value,Result) :- ( Value =\= 0 -> 
@@ -55,7 +53,7 @@ move_row([H | T],Turn,Row,Col,Acc,ResultBoard) :-   append(Acc,[H],New),
                                                     RN is Row - 1,
                                                     move_row(T,Turn,RN,Col,New,ResultBoard).
 
-move_col([H|T],Turn,0,Acc,Result) :-    append(Acc,[Turn],Row),
+move_col([_|T],Turn,0,Acc,Result) :-    append(Acc,[Turn],Row),
                                         append(Row,T,Result).
 
 move_col([H|T],Turn,Col,Acc,Result) :-  append(Acc,[H],Row),
@@ -64,4 +62,4 @@ move_col([H|T],Turn,Col,Acc,Result) :-  append(Acc,[H],Row),
 
 game_over_row([],1).
 game_over_row([H|T],Res) :- H =:= 0, game_over_row(T,Res).
-game_over_row([H|T],Res) :- H =\= 0, Res is 0.
+game_over_row([H|_],Res) :- H =\= 0, Res is 0.

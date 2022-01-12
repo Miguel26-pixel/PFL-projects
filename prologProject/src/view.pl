@@ -29,8 +29,8 @@ display_game(Board, Turn, Players) :-   nl,nl,
                                         print_board(Board,0),
                                         nl.
 
-quit_game(1,[P1,P2|[]]) :- nl,nl,write('GAME OVER'),nl,nl,write('THE WINNER IS '),print_string(P1),!.
-quit_game(2,[P1,P2|[]]) :- nl,nl,write('GAME OVER'),nl,nl,write('THE WINNER IS '),print_string(P2),!.
+quit_game(1,[P1|_]) :- nl,nl,write('GAME OVER'),nl,nl,write('THE WINNER IS '),print_string(P1),!.
+quit_game(2,[_,P2|_]) :- nl,nl,write('GAME OVER'),nl,nl,write('THE WINNER IS '),print_string(P2),!.
 
 print_string([]) :- !.
 print_string([H | T]) :- put_code(H),
