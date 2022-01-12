@@ -1,5 +1,4 @@
 :- include('game.pl').
-:- include('menu.pl').
 :- include('view.pl').
 
 initial_state(B) :- B = [   [2,0,2,1,0,2],

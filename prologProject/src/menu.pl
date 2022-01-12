@@ -1,8 +1,0 @@
-option('1',1).
-option('2',2).
-option('3',3).
-option('4',4).
-option(_,-1).
-
-get_option(Option) :- write('Option: '), get_char(O), option(O,Option), skip_line, Option =\= -1.
-get_option(Option) :- write('ERROR: Invalid Input'), nl, get_option(Option).
