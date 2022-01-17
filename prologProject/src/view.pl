@@ -20,7 +20,7 @@ display_menu :- nl,nl,
                 print_string("4 - EXIT"),
                 nl,nl.
 
-display_game(Board, Turn, Players) :-   nl,nl,
+display_game(Board/Turn/Players) :-     nl,nl,
                                         write('\t'),
                                         print_string("PATHWAY"),
                                         nl,nl,
@@ -29,14 +29,14 @@ display_game(Board, Turn, Players) :-   nl,nl,
                                         print_board(Board,0),
                                         nl.
 
-quit_game(1,[P1|_]) :- nl,nl,write('GAME OVER'),nl,nl,write('THE WINNER IS '),print_string(P1),!.
-quit_game(2,[_,P2|_]) :- nl,nl,write('GAME OVER'),nl,nl,write('THE WINNER IS '),print_string(P2),!.
+quit_game(1,_/_/(P1/_)) :- nl,nl,write('GAME OVER - PLAYER DO NOT HAVE A VALID MOVE'),nl,nl,write('THE WINNER IS '),print_string(P1),!.
+quit_game(2,_/_/(_/P2)) :- nl,nl,write('GAME OVER'),nl,nl,write('THE WINNER IS '),print_string(P2),!.
 
 print_string([]) :- !.
 print_string([H | T]) :- put_code(H),
 print_string(T).
 
-print_players(Turn,[P1,P2|[]]) :-   write('X: '), print_string(P1), nl,
+print_players(Turn,P1/P2) :-   write('X: '), print_string(P1), nl,
                                     write('O: '), print_string(P2), nl, nl,
                                     write('Turn: '), (Turn =:= 1 -> print_string(P1) ; print_string(P2)).
 
