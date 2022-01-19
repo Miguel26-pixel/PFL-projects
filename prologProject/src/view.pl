@@ -67,3 +67,5 @@ print_board_line([H | T]) :-    write(' | '),
                                     put_char('O')
                                 ),
                                 print_board_line(T).
+
+clear :- write('\33\[2J').

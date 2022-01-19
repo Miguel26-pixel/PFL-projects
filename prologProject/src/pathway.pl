@@ -3,12 +3,12 @@
 :- use_module(library(random)).
 :- use_module(library(system)).
 
-/*initial_state(Board/_Turn/_Players) :-  Board = [   [0,0,0,0,0,0],
+initial_state(Board/_Turn/_Players) :-  Board = [   [0,0,0,0,0,0],
                                                     [0,0,0,0,0,0],
                                                     [0,0,0,0,0,0],
                                                     [0,0,0,0,0,0],
                                                     [0,0,0,0,0,0],
-                                                    [0,0,0,0,0,0]   ].*/
+                                                    [0,0,0,0,0,0]   ].
 
 /*initial_state(Board/Turn/Players) :-  Board = [   [2,1,2,1,2,2],
                                                     [2,1,1,1,1,1],
@@ -17,14 +17,12 @@
                                                     [2,1,1,2,2,0],
                                                     [1,1,0,0,0,0]   ].*/
 
-initial_state(Board/_Turn/_Players) :-  Board = [   [2,0,2,1,0,2],
+/*initial_state(Board/_Turn/_Players) :-  Board = [   [2,0,2,1,0,2],
                                                     [2,0,0,1,1,1],
                                                     [1,0,0,0,1,0],
                                                     [0,2,2,0,0,2],
                                                     [0,1,0,2,2,0],
-                                                    [1,1,0,0,0,0]   ].
-
-clear :- write('\33\[2J').
+                                                    [1,1,0,0,0,0]   ].*/
 
 play :- clear,
         menu(Option),
