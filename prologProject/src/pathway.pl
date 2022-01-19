@@ -1,21 +1,22 @@
 :- include('game.pl').
 :- include('view.pl').
+:- use_module(library(random)).
 
-/*initial_state(Board/Turn/Players) :-    get_names(P1,P2),
-                                        Players = P1/P2,
-                                        Turn is 1,
-                                        Board = [   [2,1,2,1,2,2],
+/*initial_state(Board/_Turn/_Players) :-  Board = [   [0,0,0,0,0,0],
+                                                    [0,0,0,0,0,0],
+                                                    [0,0,0,0,0,0],
+                                                    [0,0,0,0,0,0],
+                                                    [0,0,0,0,0,0],
+                                                    [0,0,0,0,0,0]   ].*/
+
+/*initial_state(Board/Turn/Players) :-  Board = [   [2,1,2,1,2,2],
                                                     [2,1,1,1,1,1],
                                                     [1,2,1,0,1,2],
                                                     [2,2,2,1,1,2],
                                                     [2,1,1,2,2,0],
                                                     [1,1,0,0,0,0]   ].*/
 
-
-initial_state(Board/Turn/Players) :-    get_names(P1,P2),
-                                        Players = P1/P2,
-                                        Turn is 1,
-                                        Board = [   [2,0,2,1,0,2],
+initial_state(Board/_Turn/_Players) :-  Board = [   [2,0,2,1,0,2],
                                                     [2,0,0,1,1,1],
                                                     [1,0,0,0,1,0],
                                                     [0,2,2,0,0,2],
@@ -31,26 +32,71 @@ menu(Option) :- display_menu,
 play(1) :- playPvP.
 play(2) :- playPvC.
 play(3) :- playCvP.
-play(4) :- !.
-    
-playPvP :-  initial_state(GameState),
-            playPvP(GameState).
+play(4) :- playCvC.
+play(5) :- !.
 
-playPvP(GameState) :-   display_game(GameState),
-                        valid_moves(GameState,ValidGameState),
-                        game_over(ValidGameState,Winner),
-                        (Winner =\= 0 -> 
-                            quit_game(Winner,GameState),
-                            wait_for_input,
-                            play
-                        ;   
-                            get_valid_move(ValidGameState,Move),
-                            move(GameState,Move,NewGameState),
-                            playPvP(NewGameState)
-                        ).
+playPvP :-  initial_state(Board/Turn/Players),
+            Turn is 1,
+            get_names(P1,P2),
+            Players = P1/P2,
+            display_game(Board/Turn/Players),
+            playPvP(Board/Turn/Players).
 
-playPvC :- play.
+playPvP(GameState) :-   game_over(GameState,Winner),
+                        Winner =\= 0,
+                        quit_game(Winner,GameState),
+                        wait_for_input,
+                        play.
 
-playCvP :- play.
+playPvP(GameState) :-   choose_move_human(GameState,Move),
+                        move(GameState,Move,NewGameState),
+                        display_game(NewGameState),
+                        playPvP(NewGameState).
 
-%choose_move(Board/Turn/Players,Level,Move).
+playPvC :-  initial_state(Board/Turn/Players),
+            Turn is 1,
+            get_name_computer(P),
+            Players = P/"Computer",
+            display_game(Board/Turn/Players),
+            playPvsC(Board/Turn/Players).
+
+playCvP :-  initial_state(Board/Turn/Players),
+            Turn is 2,
+            get_name_computer(P),
+            Players = P/"Computer",
+            display_game(Board/Turn/Players),
+            playPvsC(Board/Turn/Players).
+
+playPvsC(GameState) :-  game_over(GameState,Winner),
+                        Winner =\= 0,
+                        quit_game(Winner,GameState),
+                        wait_for_input,
+                        play.
+
+playPvsC(GameState) :-  is_human(GameState),
+                        choose_move_human(GameState,Move),
+                        move(GameState,Move,NewGameState),
+                        display_game(NewGameState),
+                        playPvsC(NewGameState).
+
+playPvsC(GameState) :-  choose_move(GameState, 1, Move),
+                        move(GameState,Move,NewGameState),
+                        display_game(NewGameState),
+                        playPvsC(NewGameState).
+
+playCvC :-  initial_state(Board/Turn/Players),
+            Turn is 1,
+            Players = "Computer-1"/"Computer-2",
+            display_game(Board/Turn/Players),
+            playCvsC(Board/Turn/Players).
+
+playCvsC(GameState) :-  game_over(GameState,Winner),
+                        Winner =\= 0,
+                        quit_game(Winner,GameState),
+                        wait_for_input,
+                        play.
+
+playCvsC(GameState) :-  choose_move(GameState, 1, Move),
+                        move(GameState,Move,NewGameState),
+                        display_game(NewGameState),
+                        playCvsC(NewGameState).

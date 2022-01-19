@@ -17,7 +17,9 @@ display_menu :- nl,nl,
                 nl,
                 print_string("3 - COMPUTER VS PLAYER"),
                 nl,
-                print_string("4 - EXIT"),
+                print_string("4 - COMPUTER VS COMPUTER"),
+                nl,
+                print_string("5 - EXIT"),
                 nl,nl.
 
 display_game(Board/Turn/Players) :-     nl,nl,

@@ -18,9 +18,12 @@ menu_option(1).
 menu_option(2).
 menu_option(3).
 menu_option(4).
+menu_option(5).
 menu_option(_) :- fail.
 
 get_names(P1,P2) :- write('Name of Player 1: '),get_name(P1),nl,write('Name of Player 2: '), get_name(P2).
+
+get_name_computer(P) :- write('Name of Player 1: '),get_name(P).
 
 get_name(P) :- read_string(P).
 
