@@ -4,6 +4,13 @@
 get_new_turn(1,2).
 get_new_turn(2,1).
 
+get_valid_pos(0).
+get_valid_pos(1).
+get_valid_pos(2).
+get_valid_pos(3).
+get_valid_pos(4).
+get_valid_pos(5).
+
 move(Board/Turn/Players,Row/Col,NewGameState) :-    move_row(Board,Turn,Row,Col,[],ResultBoard), 
                                                     get_new_turn(Turn,New),
                                                     NewGameState = ResultBoard/New/Players.
@@ -15,23 +22,14 @@ game_over(Board/Turn/_Players,Winner) :-    valid_moves(Board/Turn/_Players,List
                                                 Winner is 0
                                             ).
 
-valid_moves(Board/Turn/_,ListOfMoves) :-  valid_moves(Board,Board,0,Turn,[],ListOfMoves).
+valid_moves(Board/Turn/_,ListOfMoves) :- findall(Move, try_move(Board,Turn,Move), ListOfMoves).
 
-valid_moves(_,[],_,_,Moves,Moves).
-valid_moves(Board,[R | T],RN,Turn,Acc,Moves) :- valid_moves_row(Board,R,RN,0,Turn,[],RowMoves),
-                                                append(Acc,RowMoves,New),
-                                                NewRow is RN+1,
-                                                valid_moves(Board,T,NewRow,Turn,New,Moves).
-
-valid_moves_row(_,[],_,_,_,RowMoves,RowMoves) :- !.
-valid_moves_row(Board,[V | T],RN,CN,Turn,Acc,RowMoves) :-   valid_move(Board,V,RN,CN,Turn,Result),
-                                                            ( Result =:= 1 ->
-                                                                append(Acc,[RN/CN],New)
-                                                            ;
-                                                                New = Acc
-                                                            ),
-                                                            NewCol is CN+1,
-                                                            valid_moves_row(Board,T,RN,NewCol,Turn,New,RowMoves).
+try_move(Board,Turn,Move) :-    get_valid_pos(RN),
+                                get_valid_pos(CN),
+                                getValue(Board,RN,CN,Value), 
+                                valid_move(Board,Value,RN,CN,Turn,Result), 
+                                Result =:= 1, 
+                                Move = RN/CN.
 
 valid_move(Board,Value,RN,CN,Turn,Result) :-    getNumFriends(Board,RN,CN,Turn,Friends),
                                                 getNumEnemies(Board,RN,CN,Turn,Enemies),
