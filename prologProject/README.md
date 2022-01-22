@@ -40,11 +40,28 @@ GameState = Board/Turn/Players
 
 ```
 Jogo Inicial:  
-Board = [ [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0]   ]. 
+Board = [ [0,0,0,0,0,0], 
+          [0,0,0,0,0,0],
+          [0,0,0,0,0,0], 
+          [0,0,0,0,0,0],
+          [0,0,0,0,0,0],
+          [0,0,0,0,0,0] ]. 
+
 Jogo Intermédio:  
-Board = [ [2,1,2,1,2,2], [2,1,1,1,1,1], [1,2,1,0,1,2], [2,2,2,1,1,2], [2,1,1,2,2,0], [1,1,0,0,0,0]   ].
+Board = [ [2,1,2,1,2,2],
+          [2,1,1,1,1,1],
+          [1,2,1,0,1,2],
+          [2,2,2,1,1,2], 
+          [2,1,1,2,2,0], 
+          [1,1,0,0,0,0] ].
+
 Jogo Final:  
-Board = [ [2,1,2,1,2,2], [2,1,1,1,1,1], [1,2,1,0,1,2], [2,2,2,1,1,2], [2,1,1,2,2,0], [1,1,0,2,0,2]   ].
+Board = [ [2,1,2,1,2,2], 
+          [2,1,1,1,1,1],
+          [1,2,1,0,1,2], 
+          [2,2,2,1,1,2],
+          [2,1,1,2,2,0], 
+          [1,1,0,2,0,2] ].
 ``` 
 
 ``` 
@@ -65,13 +82,13 @@ Players = P/"Computer"
 A visualização do estado de jogo está dividida em 2 predicados principais display_menu e display_game. Para o menu foi criada uma interface com o utilizador na qual são mostradas as opções de jogo e espera-se pelo input do utilizador. De acordo com o input do utilizador a opção será escolhida ou, caso seja uma opção inválida, o programa irá informar o utilizador da invalidade do mesmo. Depois de escolhida a opção, e caso um dos jogadores seja um humano, existe também a opção de o jogador escolher o nome e depois é então mostrado o tabuleiro de jogo. Para o estado do jogo é apresentado qual dos símbolos do jogo ('X' ou 'O') está associado, um tabuleiro em que as linhas estão representadas por letras (A, B, C, D, E, F) e as colunas por números (1, 2, 3, 4, 5, 6). Cada jogador insere a sua escolha para a linha e coluna e, caso a jogada efetuada seja válida, é apresentado o símbolo associado, anteriormente referido. Se os caracteres inseridos não corresponderem a uma jogada válida essa informação será apresentada ao utilizador.
  
 Visualização do Menu  
-![menu](/img/menu_view.png)
+![menu](img/menu_view.png)
 
 Escolha de Nomes  
-![name](/img/names.png)
+![name](img/names.png)
 
 Visualização do Jogo  
-![game](/img/game_view.png)
+![game](img/game_view.png)
 
 
 ### Execução de Jogadas
