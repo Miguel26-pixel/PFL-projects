@@ -33,20 +33,30 @@ Sendo que:
 
 O estado do jogo é representado através do Board, Turn e Players.  O Board, que representa o tabuleiro de jogo, foi definido com listas de listas de inteiros. O Turn representa o turno atual, ou seja, indica qual jogador detém a vez de jogar e foi definido por um inteiro. Por fim o Player caracteriza o jogador (humano ou cpu) representado por uma string.
   
+``` 
+Estado do jogo:
+GameState = Board/Turn/Players
+``` 
 
-Estado do jogo  
-```GameState = Board/Turn/Players```
-Jogo Inicial  
-```Board = [ [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0]   ].```
-Jogo Intermédio  
-```Board = [ [2,1,2,1,2,2], [2,1,1,1,1,1], [1,2,1,0,1,2], [2,2,2,1,1,2], [2,1,1,2,2,0], [1,1,0,0,0,0]   ].```
-Jogo Final  
-```Board = [ [2,1,2,1,2,2], [2,1,1,1,1,1], [1,2,1,0,1,2], [2,2,2,1,1,2], [2,1,1,2,2,0], [1,1,0,2,0,2]   ].```
-Turn  
-```Turn is 1```  
-```Turn is 2```
-Player  
-```Players = P/"Computer"```
+```
+Jogo Inicial:  
+Board = [ [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0]   ]. 
+Jogo Intermédio:  
+Board = [ [2,1,2,1,2,2], [2,1,1,1,1,1], [1,2,1,0,1,2], [2,2,2,1,1,2], [2,1,1,2,2,0], [1,1,0,0,0,0]   ].
+Jogo Final:  
+Board = [ [2,1,2,1,2,2], [2,1,1,1,1,1], [1,2,1,0,1,2], [2,2,2,1,1,2], [2,1,1,2,2,0], [1,1,0,2,0,2]   ].
+``` 
+
+``` 
+Turn:  
+Turn is 1  
+Turn is 2
+```
+
+```
+Player:  
+Players = P/"Computer"
+```  
 
     
 
