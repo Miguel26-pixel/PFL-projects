@@ -82,4 +82,4 @@ read_number(X,Acc) :-   get_code(Char),
 
 % wait_for_input/0
 % espera que o utilizador escreva um '\n' para prosseguir
-wait_for_input :- write('Input enter to continue'), skip_line.
+wait_for_input :- nl,nl,write('Press enter to continue'), skip_line.

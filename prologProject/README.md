@@ -31,13 +31,13 @@ Sendo que:
 
 ### Representação interna do estado do jogo
 
-O estado do jogo é representado através do Board, Turn e Players.  O Board, que representa o tabuleiro de jogo, foi definido com listas de listas de inteiros. O Turn representa o turno atual, ou seja, indica qual jogador detém a vez de jogar e foi definido por um inteiro. Por fim o Player caracteriza o jogador (humano ou cpu) representado por uma string.
+O estado do jogo é representado através do **Board**, **Turn** e **Players**.  O Board, que representa o tabuleiro de jogo, foi definido com listas de listas de inteiros. O Turn representa o turno atual, ou seja, indica qual jogador detém a vez de jogar e foi definido por um inteiro. Por fim o Player caracteriza o jogador (humano ou cpu) representado por uma string.
   
 ``` 
-Estado do jogo:
+Estado do jogo pode definir-se como:
 GameState = Board/Turn/Players
 ``` 
-
+Alguns exemplos :
 ```
 Jogo Inicial:  
 Board = [ [0,0,0,0,0,0], 
@@ -46,6 +46,8 @@ Board = [ [0,0,0,0,0,0],
           [0,0,0,0,0,0],
           [0,0,0,0,0,0],
           [0,0,0,0,0,0] ]. 
+Turn = 1  
+Players = "prolog"/"haskell"
 
 Jogo Intermédio:  
 Board = [ [2,1,2,1,2,2],
@@ -54,6 +56,8 @@ Board = [ [2,1,2,1,2,2],
           [2,2,2,1,1,2], 
           [2,1,1,2,2,0], 
           [1,1,0,0,0,0] ].
+Turn = 2
+Players = "prolog"/"Computer"
 
 Jogo Final:  
 Board = [ [2,1,2,1,2,2], 
@@ -62,24 +66,13 @@ Board = [ [2,1,2,1,2,2],
           [2,2,2,1,1,2],
           [2,1,1,2,2,0], 
           [1,1,0,2,0,2] ].
+Turn = 1
+Players = "Computer-1"/"Computer-2"
 ``` 
-
-``` 
-Turn:  
-Turn is 1  
-Turn is 2
-```
-
-```
-Player:  
-Players = P/"Computer"
-```  
-
-    
 
 ### Visualização do estado de jogo
 
-A visualização do estado de jogo está dividida em 2 predicados principais display_menu e display_game. Para o menu foi criada uma interface com o utilizador na qual são mostradas as opções de jogo e espera-se pelo input do utilizador. De acordo com o input do utilizador a opção será escolhida ou, caso seja uma opção inválida, o programa irá informar o utilizador da invalidade do mesmo. Depois de escolhida a opção, e caso um dos jogadores seja um humano, existe também a opção de o jogador escolher o nome e depois é então mostrado o tabuleiro de jogo. Para o estado do jogo é apresentado qual dos símbolos do jogo ('X' ou 'O') está associado, um tabuleiro em que as linhas estão representadas por letras (A, B, C, D, E, F) e as colunas por números (1, 2, 3, 4, 5, 6). Cada jogador insere a sua escolha para a linha e coluna e, caso a jogada efetuada seja válida, é apresentado o símbolo associado, anteriormente referido. Se os caracteres inseridos não corresponderem a uma jogada válida essa informação será apresentada ao utilizador.
+A visualização do estado de jogo está dividida em 2 predicados principais **display_menu/0** e **display_game(+GameState)**. Para o menu foi criada uma interface com o utilizador na qual são mostradas as opções de jogo e espera-se pelo input do utilizador. De acordo com o input do utilizador a opção será validada através de factos criados, e caso seja uma opção inválida, o programa irá informar o utilizador com uma mensagem de erro e voltar a pedir uma opção correta. Depois de escolhida a opção, e caso pelo menos um dos jogadores seja um humano, existe também a opção de o(s) jogador(es) escolher(em) o nome e depois é mostrado o tabuleiro de jogo. Para o estado do jogo é apresentado qual dos símbolos do jogo ('X' ou 'O') cada jogador está associado, um tabuleiro em que as linhas estão representadas por letras (A, B, C, D, E, F) e as colunas por números (1, 2, 3, 4, 5, 6). Cada jogador insere a sua escolha para a linha e coluna e, caso a jogada efetuada seja válida, é apresentado o símbolo associado ao jogador no tabuleiro na posição escolhida. Se os caracteres inseridos não corresponderem a uma jogada válida irá ser apresentado uma mensagem de erro ao utilizador.
  
 Visualização do Menu  
 ![menu](img/menu_view.png)
@@ -93,22 +86,32 @@ Visualização do Jogo
 
 ### Execução de Jogadas
 
+Para a execução da jogada é utilizado o predicado **move(+GameState, +Move, -NewGameState)**. Através deste predicado vai ser usado o estado atual do tabuleiro, atualizado com a informação da jogada (Move) incluindo a coluna e linha da jogada efetuada, de acordo com o turno atual. Por fim retorna um novo estado de jogo, estado esse que vai ser o novo estado a ser utilizado.
+
 ### Final do Jogo
+
+É feita a verificação de jogadas válidas com o predicado **game_over(+GameState, -Winner)** onde é obtido uma lista com as jogadas possíveis através do predicado **valid_moves/2**. Caso a lista obtida for vazia, não é possível fazer mais nenhuma jogada pelo que Winner irá corresponder ao jogador com o turno atual e o jogo terminará, caso contrário, Winner irá ser igual a 0 e o jogo continuará.
+
+Final do Jogo  
+![gameover](img/gameover.png)
 
 ### Lista de Jogadas Válidas
 
+A lista de jogadas válidas é obtida através do predicado **valid_moves(+GameState, -ListOfMoves)** onde é usado o **findall/3** sendo a aplicação feita da seguinte forma **findall(Move, try_move(Board,Turn,Move), ListOfMoves)**. Desta forma são testadas todas as jogadas possíveis, mas apenas serão obtidas as jogadas válidas, que ,tal como foi previamente referido, serão necessárias para poder avaliar a situação de fim de jogo e comparação do movimento introduzido a fim de validar, ou não, a jogada. 
+
 ### Jogada do Computador
 
-Para a escolha de uma jogada por parte do computador, o predicado **choose_move(+GameState, +Level, -Move)** é utilizado, onde **Level** será apenas uma variável aleatória, uma vez que só temos essa versão no jogo.
+Para a escolha de uma jogada por parte do computador, o predicado **choose_move(+GameState, +Level, -Move)** é utilizado, onde **Level** será sempre igual a 1, uma vez que só temos o nível 1 de dificuldade (jogada válida aleatória) implementado.
 
-Para começar a **valid_moves(+GameState, -ListOfMoves)** é usada para obter uma lista de todos os movimentos possíveis, para a ser possível a escolha de uma jogada com a utilização de **random_move(-Move, +ListOfMoves)**, onde é selecionada de forma aleatória uma jogada dentro das apresentadas na lista.
-
-
+É chamada a **valid_moves(+GameState, -ListOfMoves)** que é usada para obter uma lista de todos os movimentos possíveis, para ser possível a escolha de uma jogada com a utilização de **random_move(-Move, +ListOfMoves)**, onde é selecionada de forma aleatória uma jogada presente na lista.
 
 ## Conclusões
 
-No começo foram encontradas algumas dificuldades na adaptação à linguagem prolog e na sua implementação ao jogo pretendido. A parte mais essencial do jogo estava maioritariamente ligada à matéria lecionada apenas nas últimas aulas, o que nos dificultou na tentativa de realizar as valorizações referidas no enunciado do projeto. Dessa forma, algumas melhorias que poderiam ser feitas, seriam as valorizações, como por exemplo, a existência de um bot com dificuldade de jogo avançada e o tabuleiro ser de tamanho flexível. Apesar das dificuldades, foi um projeto muito divertido de realizar, com uma linguagem fora da caixa, que nos permitiu realizar um jogo do qual estamos muito orgulhosos.
+No começo foram encontradas algumas dificuldades na adaptação à linguagem prolog pois é uma linguagem muito diferente do habitual. A parte mais essencial do jogo estava maioritariamente ligada à matéria lecionada nas últimas semanas (loops), o que nos dificultou na tentativa de realizar a implementação do projeto com mais alguma antecedência limitando assim o tempo na última parte. 
+
+Algumas melhorias que poderiam ser feitas ao jogo seria a existência de um 'bot' com dificuldade de jogo avançada e o tabuleiro ser de tamanho flexível. Apesar das dificuldades, foi um projeto divertido de realizar, com uma linguagem fora da caixa, que nos permitiu realizar um jogo do qual estamos orgulhosos.
 
 ## Bibliografia
 - Slides e Apontamentos das aulas teóricas de PFL
 - [Documentação SICStus](https://sicstus.sics.se/documentation.html)
+- http://www.marksteeregames.com/Pathway_rules.pdf
